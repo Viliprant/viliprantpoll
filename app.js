@@ -6,6 +6,10 @@ const mongoose = require('mongoose');
 const service = require('feathers-mongoose');
 
 var path = require('path');
+const helmet = require("helmet");
+const cors = require('cors')
+const session = require('express-session')
+
 require('dotenv').config();
 
 // Models
@@ -15,6 +19,17 @@ const events = require('./Events/events');
 
 // Creates an ExpressJS compatible Feathers application
 const app = express(feathers());
+
+app.use(cors());
+app.use(helmet());
+app.use(session({
+    resave: false,
+    saveUninitialized: false,
+    secret: 'ViliprantPoll',
+    cookie: { 
+        sameSite: 'Strict',
+    }
+}))
 
 // Parse HTTP JSON bodies
 app.use(express.json());

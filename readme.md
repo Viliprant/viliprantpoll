@@ -8,9 +8,9 @@
 - Feather JS
 
 ## TODO
-- Create `DB`
-- Create `Controllers`
 - Create `Views`
+- Add route to `show a poll`
+- add `authentification`
 
 ## Features
 - Account to have poll `history`
@@ -18,4 +18,3 @@
 - 1 vote by customer
 - `One` or `Multiple` choice
 - `Timer` to vote
-
