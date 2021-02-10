@@ -4,34 +4,41 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Document</title>
+    <link rel="stylesheet" href="public/Views/global.css">
+    <link rel="stylesheet" href="public/Views/poll/style.css">
+    <script src="//unpkg.com/@feathersjs/client@^4.3.0/dist/feathers.js" defer></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js" defer></script>
+    <script type="text/javascript" src="public/Views/poll/script.js" defer></script>
+    <title>Villiprant - Poll</title>
 </head>
-<body>
     <body>
-        <main id="main">
+        <main id="main" class="container">
             <h1>Polls</h1>
+            <div class="header-vote">
+                <div class="total-vote bold">Total: 12</div>
+            </div>
+            <div class="content-vote">
+                <div class="vote">
+                    <div class="bar" style="width: 0%"></div>
+                    <div class="label">Question1</div>
+                    <span>0 (0%)</span>
+                </div>
+                <div class="vote">
+                    <div class="bar" style="width: 30%"></div>
+                    <div class="label">Question1</div>
+                    <span>3 (30%)</span>
+                </div>
+                <div class="vote">
+                    <div class="bar" style="width: 60%"></div>
+                    <div class="label">Question1</div>
+                    <span>4 (60%)</span>
+                </div>
+                <div class="vote">
+                    <div class="bar" style="width: 100%"></div>
+                    <div class="label">Question1</div>
+                    <span>5 (100%)</span>
+                </div>
+            </div>
         </main>
-    
-    <script src="//unpkg.com/@feathersjs/client@^4.3.0/dist/feathers.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
-    <script type="text/javascript">
-        // Set up socket.io
-        const socket = io('http://localhost:3030');
-        // Initialize a Feathers app
-        const app = feathers();
-        
-        // Register socket.io to talk to our server
-        app.configure(feathers.socketio(socket));
-
-        const test = app.service('polls').create({
-            title: 'test',
-            questions: [
-                {name: 'Question1'},
-                {name: 'Question2'},
-                {name: 'Question3'},
-            ],
-        })
-    </script>
-</body>
+    </body>
 </html>
