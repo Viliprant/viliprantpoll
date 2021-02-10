@@ -21,15 +21,9 @@ const events = require('./Events/events');
 const app = express(feathers());
 
 app.use(cors());
-app.use(helmet());
-app.use(session({
-    resave: false,
-    saveUninitialized: false,
-    secret: 'ViliprantPoll',
-    cookie: { 
-        sameSite: 'Strict',
-    }
-}))
+app.use(helmet({
+  contentSecurityPolicy: false,
+}));
 
 // Parse HTTP JSON bodies
 app.use(express.json());
@@ -45,7 +39,7 @@ app.configure(socketio());
 mongoose.connect(process.env.DB_HOST, { useUnifiedTopology: true, useNewUrlParser: true });
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public/Views', 'Polls.html'));
+    res.sendFile(path.join(__dirname, 'public/Views/poll', 'index.html'));
 });
 
 app.use('/polls', service({

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Document</title>
+</head>
+<body>
+    <body>
+        <main id="main">
+            <h1>Polls</h1>
+        </main>
+    
+    <script src="//unpkg.com/@feathersjs/client@^4.3.0/dist/feathers.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+    <script type="text/javascript">
+        // Set up socket.io
+        const socket = io('http://localhost:3030');
+        // Initialize a Feathers app
+        const app = feathers();
+        
+        // Register socket.io to talk to our server
+        app.configure(feathers.socketio(socket));
+
+        const test = app.service('polls').create({
+            title: 'test',
+            questions: [
+                {name: 'Question1'},
+                {name: 'Question2'},
+                {name: 'Question3'},
+            ],
+        })
+    </script>
+</body>
+</html>
