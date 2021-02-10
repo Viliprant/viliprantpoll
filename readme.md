@@ -4,6 +4,7 @@
 - Vanilla JS
 - Node
 - MongoDB
+  - Mongoose
 - Feather JS
 
 ## TODO
