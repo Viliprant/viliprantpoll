@@ -16,15 +16,15 @@ body{
     color: white;
 }
 
-.header-vote{
+#header-vote{
     padding: 0.5rem;
 }
-    .total-vote{
+    #total-vote{
         display: flex;
         justify-content: flex-end;
     }
 
-.content-vote{
+#content-vote{
     flex: 1;
     display: flex;
     flex-direction: column;

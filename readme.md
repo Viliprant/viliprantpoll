@@ -9,8 +9,9 @@
 
 ## TODO
 - Create `Views`
-- Add route to `show a poll`
-- add `authentification`
+- Able to vote
+- Add a poll (View)
+- Add `authentification`
 
 ## Features
 - Account to have poll `history`

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 const QuestionSchema = new Schema({ 
-    name: {
+    label: {
         type: String,
         required: true
     },
