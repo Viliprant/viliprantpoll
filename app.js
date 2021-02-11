@@ -36,7 +36,7 @@ app.configure(express.rest());
 // Configure Socket.io real-time APIs
 app.configure(socketio());
 
-mongoose.connect(process.env.DB_HOST, { useUnifiedTopology: true, useNewUrlParser: true });
+mongoose.connect(process.env.DB_HOST, { useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false});
 
 app.get('/poll', (req, res) => {
     res.sendFile(path.join(__dirname, 'public/Views/poll', 'index.html'));
