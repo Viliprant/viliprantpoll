@@ -17,9 +17,28 @@ function getPollId(){
     return urlParams.get('poll');
 }
 
+let copiedInterval;
+function copyToClipboard(DOMElement) {
+    var range = document.createRange();
+    range.selectNode(DOMElement);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+    document.execCommand("copy");
+
+    DOMElement.classList.add("copied");
+    window.clearInterval(copiedInterval);
+    copiedInterval = window.setInterval(() => showCopiedLabel(DOMElement), 5001);
+}
+
+function showCopiedLabel(DOMElement){
+    DOMElement.classList.remove("copied");
+}
+
 const main = async () => {
     let pollData;
     const shareLink = document.getElementById('share-link');
+    const linkWrapper = document.getElementById('link-wrapper');
+
     try{
         pollData = await app.service('polls').get(getPollId());
     }
@@ -32,6 +51,11 @@ const main = async () => {
     const path = `${window.location.origin}/poll?poll=${pollData._id}`;
     shareLink.textContent = path;
     shareLink.href = path;
+
+    linkWrapper.addEventListener('click', (evt) => {
+        evt.preventDefault();
+        copyToClipboard(shareLink)
+    });
 
     const poll = new Poll(pollData, app);
 
