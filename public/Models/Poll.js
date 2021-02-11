@@ -67,9 +67,12 @@ export default class Poll{
         }
     }
 
-    updateDOMPoll(){
-        this.totalVoteDOM.textContent = `Total: ${this.calculTotalVote()}`;
+    updateDOMPoll(data){
+        this.title = data.title;
+        this.questions = data.questions
 
+        this.totalVoteDOM.textContent = `Total: ${this.calculTotalVote()}`;
+        console.log('updated')
         for (const [key, value] of Object.entries(this.questions)) {
             const votes = value.votes;
             const label = value.label;
