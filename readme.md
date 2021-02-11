@@ -9,8 +9,8 @@
 
 ## TODO
 - Create `Views`
-- Able to vote
-- Add a poll (View)
+  - Add a poll (View)
+- Be able to vote
 - Add `authentification`
 
 ## Features
@@ -18,4 +18,4 @@
 - Make `public` or `private` poll
 - 1 vote by customer
 - `One` or `Multiple` choice
-- `Timer` to vote
+- `Timer` to vote (minutes, hours, days ...)

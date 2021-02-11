@@ -85,12 +85,12 @@ const main = async () => {
     createPoll(poll);
 
     app.service('polls').on('updated', updatePoll);
-    setInterval(async () => {
-        poll.questions[0].votes = Math.floor(Math.random() * Math.floor(100));
-        poll.questions[1].votes = Math.floor(Math.random() * Math.floor(100));
-        poll.questions[2].votes = Math.floor(Math.random() * Math.floor(100));
-        await app.service('polls').update(poll._id, poll);
-    }, 1000)
+    // setInterval(async () => {
+    //     poll.questions[0].votes = Math.floor(Math.random() * Math.floor(100));
+    //     poll.questions[1].votes = Math.floor(Math.random() * Math.floor(100));
+    //     poll.questions[2].votes = Math.floor(Math.random() * Math.floor(100));
+    //     await app.service('polls').update(poll._id, poll);
+    // }, 1000)
   };
   
   main();
