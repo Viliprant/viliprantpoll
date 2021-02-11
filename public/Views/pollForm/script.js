@@ -1,9 +1,7 @@
-// Set up socket.io
 const socket = io('http://localhost:3030');
-// Initialize a Feathers app
+
 const app = feathers();
 
-// Register socket.io to talk to our server
 app.configure(feathers.socketio(socket));
 
 const plusIcon = document.getElementById('plus-icon');
@@ -22,7 +20,7 @@ function addResponseField(evt){
     responsesWrapper.appendChild(newResponseInput);
 }
 
-function submitPollForm(evt){
+async function submitPollForm(evt){
     evt.preventDefault();
     
     const dataToSend = getInfosFromForm(evt);
@@ -31,11 +29,12 @@ function submitPollForm(evt){
 
     if(isValid)
     {
-        app.service('polls').create(dataToSend);
+        const newPoll = await app.service('polls').create(dataToSend);
+        window.location.replace(`${window.location.origin}/poll?poll=${newPoll._id}`)
     }
     else{
         // TODO: Generate error on the view
-        console.error('Wrong Data');
+        console.error('Must have a title and minimum 2 responses');
     }
 }
 
