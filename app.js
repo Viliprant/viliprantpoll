@@ -23,6 +23,7 @@ app.use(cors());
 app.use(helmet({
   contentSecurityPolicy: false,
 }));
+app.set('trust proxy', process.env.QUOTAGUARD_URL);
 
 // Parse HTTP JSON bodies
 app.use(express.json());
