@@ -60,6 +60,6 @@ app.use(express.errorHandler());
 events(app);
 
 // Start the server
-app.listen(process.env.PORT 3030).on('listening', () =>
+app.listen(process.env.PORT || 3030).on('listening', () =>
   console.log('Feathers server listening on localhost:3030')
 );
