@@ -8,10 +8,9 @@
 - Feather JS
 
 ## TODO
-- Create `Views`
-  - Add a poll (View)
 - Add `authentification`
 - Fix infinite vote (later with account ?)
+- Add simple way to `share` a poll
 
 ## Features
 - Account to have poll `history`
