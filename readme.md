@@ -9,7 +9,6 @@
 
 ## TODO
 - Add `authentification`
-- Fix infinite vote (later with account ?)
 - Add simple way to `share` a poll
 
 ## Features
