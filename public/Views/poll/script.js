@@ -1,7 +1,7 @@
 import Poll from '../../Models/Poll.js';
 
 // Set up socket.io
-const socket = io('http://localhost:3030');
+const socket = io();
 // Initialize a Feathers app
 const app = feathers();
 
