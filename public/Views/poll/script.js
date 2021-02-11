@@ -16,6 +16,9 @@ function createPoll(poll){
     // DOM Elements
     const contentVote = document.getElementById('content-vote');
     const totalVote = document.getElementById('total-vote');
+    const title = document.getElementById('title');
+
+    title.textContent = poll.title;
 
     // TOTAL VOTES
     const nbTotalVotes = poll.questions.reduce((accumulator, currentValue) => {
@@ -39,7 +42,7 @@ function createPoll(poll){
         wrapperLabel.textContent = label;
 
         const spanVotes = document.createElement('span');
-        spanVotes.textContent = `${votes} ${percent}%`;
+        spanVotes.textContent = `${votes} (${percent}%)`;
 
         wrapperBar.append(bar, wrapperLabel, spanVotes);
         contentVote.append(wrapperBar);
@@ -47,7 +50,6 @@ function createPoll(poll){
 }
 
 function updatePoll(poll){
-    // TODO: UPDATE POLL
     // DOM Elements
     const contentVote = document.getElementById('content-vote');
     const totalVote = document.getElementById('total-vote');
@@ -73,7 +75,7 @@ function updatePoll(poll){
         wrapperLabel.textContent = label;
 
         const spanVotes = wrapperBar.getElementsByTagName('span')[0];
-        spanVotes.textContent = `${votes} ${percent}%`;
+        spanVotes.textContent = `${votes} (${percent}%)`;
 
     }
 }
@@ -94,12 +96,3 @@ const main = async () => {
   };
   
   main();
-
-// const test = app.service('polls').create({
-//     title: 'test',
-//     questions: [
-//         {label: 'Question1'},
-//         {label: 'Question2'},
-//         {label: 'Question3'},
-//     ],
-// })
