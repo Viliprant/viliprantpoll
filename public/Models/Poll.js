@@ -15,9 +15,12 @@ export default class Poll{
     async vote(evt){
         evt.preventDefault();
         const id = evt.currentTarget.dataset.id;
+        const checkbox = evt.currentTarget.getElementsByTagName('input')[0];
+        checkbox.checked = !checkbox.checked;
+
         this.questions = this.questions.map((question) => {
             if(question._id === id) {
-                question.votes ++;
+                checkbox.checked ? question.votes ++ : question.votes --;
             }
             return question;
         })
@@ -34,9 +37,10 @@ export default class Poll{
     
         // CREATE BAR
         for(const {_id, label, votes} of this.questions){
-            const wrapperBar = document.createElement('div');
+            const wrapperBar = document.createElement('label');
             wrapperBar.classList.add('vote');
-            wrapperBar.addEventListener('click', (evt) => this.vote(evt), true);
+            wrapperBar.for = _id;
+            wrapperBar.addEventListener('click', (evt) => this.vote(evt));
             wrapperBar.dataset.id = _id;
     
             const percent = this.nbTotalVotes !== 0 ? Math.ceil((100 * votes) / this.nbTotalVotes ) : 0;
@@ -52,7 +56,13 @@ export default class Poll{
             const spanVotes = document.createElement('span');
             spanVotes.textContent = `${votes} (${percent}%)`;
     
-            wrapperBar.append(bar, wrapperLabel, spanVotes);
+            // Chekbox (unique vote)
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.name = _id;
+            checkbox.hidden = true;
+
+            wrapperBar.append(bar, wrapperLabel, spanVotes, checkbox);
             this.contentVoteDOM.append(wrapperBar);
         }
     }
