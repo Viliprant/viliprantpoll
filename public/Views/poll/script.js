@@ -19,6 +19,7 @@ function getPollId(){
 
 const main = async () => {
     let pollData;
+    const shareLink = document.getElementById('share-link');
     try{
         pollData = await app.service('polls').get(getPollId());
     }
@@ -27,6 +28,10 @@ const main = async () => {
             window.location.replace(window.location.origin);
         }
     }
+
+    const path = `${window.location.origin}/poll?poll=${pollData._id}`;
+    shareLink.textContent = path;
+    shareLink.href = path;
 
     const poll = new Poll(pollData, app);
 
