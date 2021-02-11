@@ -11,7 +11,6 @@ app.configure(feathers.socketio(socket));
 function getPollId(){
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    console.log(urlParams.get('poll'))
     if(urlParams.get('poll') == null){
         window.location.replace(window.location.origin);
     }
@@ -19,20 +18,21 @@ function getPollId(){
 }
 
 const main = async () => {
-    const pollData = await app.service('polls').get(getPollId());
-    const poll = new Poll(pollData, app);
+    let pollData;
+    try{
+        pollData = await app.service('polls').get(getPollId());
+    }
+    catch(err){
+        if(err.code === 400 || err.code === 404){
+            window.location.replace(window.location.origin);
+        }
+    }
 
-    console.log(poll);
+    const poll = new Poll(pollData, app);
 
     poll.createDOMPoll(poll);
 
     app.service('polls').on('updated', (data) => poll.updateDOMPoll(data));
-    // setInterval(async () => {
-    //     poll.questions[0].votes = Math.floor(Math.random() * Math.floor(100));
-    //     poll.questions[1].votes = Math.floor(Math.random() * Math.floor(100));
-    //     poll.questions[2].votes = Math.floor(Math.random() * Math.floor(100));
-    //     await app.service('polls').update(poll._id, poll);
-    // }, 1000)
   };
   
   main();
