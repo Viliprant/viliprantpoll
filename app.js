@@ -38,6 +38,9 @@ app.configure(socketio());
 
 mongoose.connect(process.env.DB_HOST, { useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false});
 
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/Views/pollForm', 'index.html'));
+});
 app.get('/poll', (req, res) => {
     res.sendFile(path.join(__dirname, 'public/Views/poll', 'index.html'));
 });

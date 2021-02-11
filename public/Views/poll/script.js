@@ -11,6 +11,10 @@ app.configure(feathers.socketio(socket));
 function getPollId(){
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
+    console.log(urlParams.get('poll'))
+    if(urlParams.get('poll') == null){
+        window.location.replace(window.location.origin);
+    }
     return urlParams.get('poll');
 }
 
