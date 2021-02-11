@@ -8,7 +8,6 @@ const service = require('feathers-mongoose');
 var path = require('path');
 const helmet = require("helmet");
 const cors = require('cors')
-const { createProxyMiddleware } = require('http-proxy-middleware');
 
 require('dotenv').config();
 
@@ -39,13 +38,8 @@ app.configure(socketio());
 mongoose.connect(process.env.DB_HOST, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
-  useFindAndModify: false,
+  useFindAndModify: false
 });
-
-app.use('/', createProxyMiddleware({
-  target: process.env.QUOTAGUARD_URL || __dirname,
-  changeOrigin: true
-}));
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/Views/pollForm', 'index.html'));
