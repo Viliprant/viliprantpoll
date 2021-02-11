@@ -9,7 +9,6 @@
 
 ## TODO
 - Add `authentification`
-- Add simple way to `share` a poll
 
 ## Features
 - Account to have poll `history`
