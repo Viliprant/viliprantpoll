@@ -16,7 +16,7 @@ function getPollId(){
 
 const main = async () => {
     const pollData = await app.service('polls').get(getPollId());
-    const poll = new Poll(pollData);
+    const poll = new Poll(pollData, app);
 
     console.log(poll);
 

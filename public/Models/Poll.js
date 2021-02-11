@@ -1,8 +1,10 @@
 export default class Poll{
-    constructor({_id, title, questions}){
+    constructor({_id, title, questions}, app){
         this._id = _id;
         this.title = title;
         this.questions = questions;
+
+        this.app = app;
 
         // DOM Elements
         this.contentVoteDOM = document.getElementById('content-vote');
@@ -10,16 +12,19 @@ export default class Poll{
         this.titleDOM = document.getElementById('title');
     }
 
-    vote(evt){
+    async vote(evt){
         evt.preventDefault();
-        const id = evt.target.dataset.id;
+        const id = evt.currentTarget.dataset.id;
         this.questions = this.questions.map((question) => {
             if(question._id === id) {
                 question.votes ++;
             }
             return question;
         })
-        console.log(this)
+        await this.app.service('polls').update(this._id, {
+            questions: this.questions,
+            title: this.title,
+        });
     }
 
     createDOMPoll(){
@@ -31,7 +36,7 @@ export default class Poll{
         for(const {_id, label, votes} of this.questions){
             const wrapperBar = document.createElement('div');
             wrapperBar.classList.add('vote');
-            wrapperBar.addEventListener('click', (evt) => this.vote(evt));
+            wrapperBar.addEventListener('click', (evt) => this.vote(evt), true);
             wrapperBar.dataset.id = _id;
     
             const percent = this.nbTotalVotes !== 0 ? Math.ceil((100 * votes) / this.nbTotalVotes ) : 0;
