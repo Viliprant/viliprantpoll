@@ -10,8 +10,8 @@
 ## TODO
 - Create `Views`
   - Add a poll (View)
-- Be able to vote
 - Add `authentification`
+- Fix infinite vote (later with account ?)
 
 ## Features
 - Account to have poll `history`
