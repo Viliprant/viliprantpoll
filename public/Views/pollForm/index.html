@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="/public/Views/global.css">
     <link rel="stylesheet" href="/public/Views/pollForm/style.css">
     <script src="//unpkg.com/@feathersjs/client@^4.3.0/dist/feathers.js" defer></script>
@@ -12,6 +13,28 @@
     <title>Villiprant - Add Poll</title>
 </head>
 <body>
-    
+    <main class="container">
+        <h1>Add a poll</h1>
+        <form id="pollForm">
+            <div class="group-control">
+                <label>Title</label>
+                <input type="text" name="title" />
+            </div>
+            <div class="group-control" id="responses">
+                <label>Responses</label>
+                <input type="text" class="response" name="response1"/>
+                <input type="text" class="response" name="response2" />
+            </div>
+            <span id="plus-icon" class="material-icons">
+                add_circle_outline
+            </span>
+            <button type="submit">
+                <span class="material-icons">
+                    done
+                </span>
+                <span>Confirm</span>
+            </button>
+        </form>
+    </main>
 </body>
 </html>
