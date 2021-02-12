@@ -13,13 +13,11 @@ export default class Poll{
     }
 
     vote(evt){
-        evt.preventDefault();
-        const id = evt.currentTarget.dataset.id;
-        const checkbox = evt.currentTarget.getElementsByTagName('input')[0];
+        const id = evt.currentTarget.name;
+        const checkbox = evt.currentTarget;
 
         this.questions = this.questions.map((question) => {
             if(question._id === id) {
-                checkbox.checked = !checkbox.checked;
                 checkbox.checked ? question.votes ++ : question.votes --;
             }
             return question;
@@ -40,8 +38,6 @@ export default class Poll{
             const wrapperBar = document.createElement('label');
             wrapperBar.classList.add('vote');
             wrapperBar.for = _id;
-            wrapperBar.addEventListener('click', (evt) => this.vote(evt));
-            wrapperBar.dataset.id = _id;
     
             const percent = this.nbTotalVotes !== 0 ? Math.ceil((100 * votes) / this.nbTotalVotes ) : 0;
     
@@ -61,6 +57,7 @@ export default class Poll{
             checkbox.type = 'checkbox';
             checkbox.name = _id;
             checkbox.hidden = true;
+            checkbox.addEventListener('change', (evt) => this.vote(evt))
 
             wrapperBar.append(bar, wrapperLabel, spanVotes, checkbox);
             this.contentVoteDOM.append(wrapperBar);

@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/c0a1a03a-155e-4ce3-826e-cc1992ab8bb9/resourceGroups/Viliprantpoll/providers/Microsoft.Web/sites/villiprantpoll",
+    "appService.deploySubpath": "."
+}
