@@ -12,19 +12,19 @@ export default class Poll{
         this.titleDOM = document.getElementById('title');
     }
 
-    async vote(evt){
+    vote(evt){
         evt.preventDefault();
         const id = evt.currentTarget.dataset.id;
         const checkbox = evt.currentTarget.getElementsByTagName('input')[0];
-        checkbox.checked = !checkbox.checked;
 
         this.questions = this.questions.map((question) => {
             if(question._id === id) {
+                checkbox.checked = !checkbox.checked;
                 checkbox.checked ? question.votes ++ : question.votes --;
             }
             return question;
         })
-        await this.app.service('polls').update(this._id, {
+        this.app.service('polls').update(this._id, {
             questions: this.questions,
             title: this.title,
         });
