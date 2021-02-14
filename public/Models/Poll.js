@@ -13,19 +13,27 @@ export default class Poll{
     }
 
     vote(evt){
+        evt.preventDefault();
         const id = evt.currentTarget.name;
         const checkbox = evt.currentTarget;
 
-        this.questions = this.questions.map((question) => {
-            if(question._id === id) {
-                checkbox.checked ? question.votes ++ : question.votes --;
-            }
-            return question;
-        })
-        this.app.service('polls').update(this._id, {
-            questions: this.questions,
-            title: this.title,
-        });
+        const cloneCheckbox = checkbox.cloneNode();
+        checkbox.parentNode.replaceChild(cloneCheckbox, checkbox);
+
+        const dataToSend = {
+            _id: this._id,
+            questionID: id,
+            vote : checkbox.checked
+        }
+        this.app.service('polls').update(this._id, dataToSend)
+            .then((updatedPoll) => {
+                this.questions = updatedPoll.questions;
+                cloneCheckbox.checked = !checkbox.checked;
+                cloneCheckbox.addEventListener('click', this.vote.bind(this));
+            })
+            .catch(() => {
+                cloneCheckbox.addEventListener('click', this.vote.bind(this));
+            })
     }
 
     createDOMPoll(){
@@ -57,7 +65,7 @@ export default class Poll{
             checkbox.type = 'checkbox';
             checkbox.name = _id;
             checkbox.hidden = true;
-            checkbox.addEventListener('change', (evt) => this.vote(evt))
+            checkbox.addEventListener('click', this.vote.bind(this));
 
             wrapperBar.append(bar, wrapperLabel, spanVotes, checkbox);
             this.contentVoteDOM.append(wrapperBar);

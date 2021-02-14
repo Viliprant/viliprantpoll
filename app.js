@@ -56,7 +56,27 @@ app.use('/polls', service({
       default: 2,
       max: 4
     }
-}));
+})).hooks({
+  before:{
+    update: [async context => {
+      const data = context.data;
+      const poll = await context.service.get(data._id);
+      const questions = poll.questions.map((question) => {
+        if(question._id == data.questionID) {
+          data.vote ? question.votes ++ : question.votes --;
+        }
+        
+        return question;
+      })
+
+      context.data = {
+        ...poll,
+        questions: questions,
+      }
+      return context;
+    }]
+  }
+})
 
 // Register a nicer error handler than the default Express one
 app.use(express.errorHandler());
